@@ -1,7 +1,19 @@
 from fastapi import FastAPI
 
-app = FastAPI() # Creates web application object(Will get requests from website and route them to backend)
+from Backend.app.h9n.schemas.repe_deal import REPEDealProfile
 
-@app.get("/") # Route when an HTTP GET request is sent to /
+
+# Creates the main FastAPI application for HANA
+app = FastAPI()
+
+
+# Basic endpoint used to verify that the backend is running
+@app.get("/")
 def root():
     return {"message": "HANA Active"}
+
+
+# Test endpoint for validating REPE deal data
+@app.post("/api/h9n/repe/test")
+def test_repe_deal(deal: REPEDealProfile):
+    return deal
